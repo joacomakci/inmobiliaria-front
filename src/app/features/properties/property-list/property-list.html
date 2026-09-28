@@ -1,0 +1,32 @@
+<section class="property-list">
+  <h1>Propiedades disponibles</h1>
+
+  @if (loading) {
+    <p>Cargando propiedades...</p>
+  }
+
+  @if (error) {
+    <p class="property-list__error">
+      Ocurrió un error al cargar las propiedades. Intentá recargar la página.
+    </p>
+  }
+
+  @if (!loading && !error) {
+    @if (properties.length === 0) {
+      <p>No hay propiedades disponibles por el momento.</p>
+    } @else {
+      <div class="property-list__grid">
+        @for (property of properties; track property.id) {
+          <article class="property-card">
+            <h2>{{ property.title }}</h2>
+            <p>{{ property.city }}@if (property.neighborhood) {, {{ property.neighborhood }}}</p>
+            <p class="property-card__price">
+              {{ property.currency }} {{ property.price | number }}
+            </p>
+            <p>{{ property.rooms }} ambientes · {{ property.areaM2 }} m²</p>
+          </article>
+        }
+      </div>
+    }
+  }
+</section>
