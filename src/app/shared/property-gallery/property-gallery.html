@@ -1,0 +1,39 @@
+<div class="gallery">
+  <div class="gallery__main" (click)="openLightbox()">
+    <img [src]="images()[selectedIndex()].url" [alt]="title()" />
+
+    @if (images().length > 1) {
+      <button class="gallery__nav gallery__nav--prev" (click)="previous($event)">‹</button>
+      <button class="gallery__nav gallery__nav--next" (click)="next($event)">›</button>
+    }
+  </div>
+
+  @if (images().length > 1) {
+    <div class="gallery__thumbs">
+      @for (image of images(); track image.id; let i = $index) {
+        <button
+          class="gallery__thumb"
+          [class.gallery__thumb--active]="i === selectedIndex()"
+          (click)="select(i)"
+        >
+          <img [src]="image.url" [alt]="title()" />
+        </button>
+      }
+    </div>
+  }
+</div>
+
+@if (lightboxOpen()) {
+  <div class="lightbox" (click)="closeLightbox()">
+    <button class="lightbox__close" (click)="closeLightbox()">✕</button>
+
+    <img [src]="images()[selectedIndex()].url" [alt]="title()" />
+
+    @if (images().length > 1) {
+      <button class="lightbox__nav lightbox__nav--prev" (click)="previous($event)">‹</button>
+      <button class="lightbox__nav lightbox__nav--next" (click)="next($event)">›</button>
+    }
+
+    <span class="lightbox__counter">{{ selectedIndex() + 1 }} / {{ images().length }}</span>
+  </div>
+}

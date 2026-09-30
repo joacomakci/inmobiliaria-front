@@ -1,0 +1,20 @@
+<section class="hero">
+  <div class="hero__search">
+    <div class="hero__field">
+      <label>Operación</label>
+      <select [(ngModel)]="operation" name="operation">
+        <option value="alquiler">Alquilar</option>
+        <option value="venta">Comprar</option>
+      </select>
+    </div>
+
+    <button class="btn btn--primary hero__search-btn" (click)="search()">
+      Buscar
+    </button>
+  </div>
+</section>
+
+<section class="featured">
+  <h2>Propiedades Destacadas</h2>
+  <!-- acá va el grid de destacadas, en el próximo paso -->
+</section>

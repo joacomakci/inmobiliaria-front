@@ -1,0 +1,55 @@
+.hero {
+  background: var(--color-primary-light);
+  padding: 80px 48px;
+  display: flex;
+  justify-content: center;
+
+  &__search {
+    background: white;
+    border-radius: var(--radius-pill);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__field {
+    padding: 8px 20px;
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2px;
+    }
+
+    select {
+      border: none;
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__search-btn {
+    padding: 14px 32px;
+  }
+}
+
+.featured {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+}

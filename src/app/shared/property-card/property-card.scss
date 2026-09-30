@@ -1,0 +1,83 @@
+.property-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  &__image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--color-primary-light);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__image-placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__price {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  &__badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  &__body {
+    padding: 16px;
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+  }
+
+  &__location {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin: 0 0 12px;
+  }
+
+  &__features {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+
+    span:not(:last-child)::after {
+      content: '·';
+      margin-left: 12px;
+    }
+  }
+}

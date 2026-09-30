@@ -1,0 +1,118 @@
+<section class="property-detail">
+  @if (loading()) {
+    <p class="property-detail__status">Cargando propiedad...</p>
+  }
+
+  @if (error()) {
+    <p class="property-detail__status property-detail__status--error">
+      No pudimos encontrar esta propiedad.
+      <a routerLink="/">Volver al listado</a>
+    </p>
+  }
+
+  @if (property(); as prop) {
+    <a routerLink="/" class="property-detail__back">← Volver al listado</a>
+
+    @if (prop.images.length > 0) {
+      @if (prop.images.length > 0) {
+  <app-property-gallery [images]="prop.images" [title]="prop.title" />
+}
+    }
+
+    <div class="property-detail__layout">
+      <div class="property-detail__main">
+        <span class="property-detail__operation">
+          {{ prop.operation === 'alquiler' ? 'ALQUILER' : 'VENTA' }}
+        </span>
+        <h1>{{ prop.title }}</h1>
+
+        <p class="property-detail__location">
+          {{ prop.address }}, {{ prop.city }}
+          @if (prop.neighborhood) { ({{ prop.neighborhood }}) }
+        </p>
+
+        <p class="property-detail__price">
+          {{ prop.currency }} {{ prop.price | number }}
+          @if (prop.operation === 'alquiler') { <span>/ mes</span> }
+        </p>
+
+        <ul class="property-detail__features">
+          @if (prop.areaM2) { <li>{{ prop.areaM2 }} m²</li> }
+          @if (prop.rooms) { <li>{{ prop.rooms }} ambientes</li> }
+          @if (prop.bathrooms) { <li>{{ prop.bathrooms }} baños</li> }
+        </ul>
+
+        <p class="property-detail__description">{{ prop.description }}</p>
+      </div>
+
+      <aside class="property-detail__sidebar">
+        <div class="property-detail__agent">
+          <h3>Contacto</h3>
+          <p class="property-detail__agent-name">
+            {{ prop.agent.firstName }} {{ prop.agent.lastName }}
+          </p>
+          @if (prop.agent.phone) { <p>{{ prop.agent.phone }}</p> }
+        </div>
+
+        <div class="property-detail__contact">
+          <h3>¿Te interesa esta propiedad?</h3>
+
+          @if (sent()) {
+            <p class="property-detail__success">
+              ¡Gracias! Recibimos tu consulta, te vamos a contactar a la brevedad.
+            </p>
+          } @else {
+            <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()">
+              <div class="form-field">
+                <label for="firstName">Nombre</label>
+                <input id="firstName" type="text" formControlName="firstName" />
+                @if (contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched) {
+                  <span class="form-error">El nombre es obligatorio</span>
+                }
+              </div>
+
+              <div class="form-field">
+                <label for="lastName">Apellido</label>
+                <input id="lastName" type="text" formControlName="lastName" />
+                @if (contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched) {
+                  <span class="form-error">El apellido es obligatorio</span>
+                }
+              </div>
+
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" />
+                @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                  <span class="form-error">Ingresá un email válido</span>
+                }
+              </div>
+
+              <div class="form-field">
+                <label for="phone">Teléfono (opcional)</label>
+                <input id="phone" type="tel" formControlName="phone" />
+              </div>
+
+              <div class="form-field">
+                <label for="message">Mensaje</label>
+                <textarea id="message" rows="4" formControlName="message"></textarea>
+                @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+                  <span class="form-error">Contanos en qué estás interesado</span>
+                }
+              </div>
+
+              @if (sendError()) {
+                <p class="form-error">
+                  Ocurrió un error al enviar tu consulta. Probá de nuevo.
+                </p>
+              }
+
+              <button type="submit" class="btn btn--primary" [disabled]="sending()">
+                @if (sending()) { Enviando... } @else { Enviar consulta }
+              </button>
+            </form>
+          }
+        </div>
+      </aside>
+    </div>
+  }
+</section>

@@ -1,0 +1,30 @@
+<a [routerLink]="['/propiedades', property().slug]" class="property-card">
+  <div class="property-card__image">
+    @if (property().images.length > 0) {
+      <img [src]="property().images[0].url" [alt]="property().title" />
+    } @else {
+      <div class="property-card__image-placeholder"></div>
+    }
+
+    <span class="property-card__price">
+      {{ property().currency }} {{ property().price | number }}
+    </span>
+
+    @if (property().featured) {
+      <span class="property-card__badge">DESTACADA</span>
+    }
+  </div>
+
+  <div class="property-card__body">
+    <h3>{{ property().title }}</h3>
+    <p class="property-card__location">
+      {{ property().address }}@if (property().neighborhood) {, {{ property().neighborhood }}}
+    </p>
+
+    <div class="property-card__features">
+      @if (property().rooms) { <span>{{ property().rooms }} dormitorios</span> }
+      @if (property().bathrooms) { <span>{{ property().bathrooms }} baño{{ property().bathrooms! > 1 ? 's' : '' }}</span> }
+      @if (property().areaM2) { <span>{{ property().areaM2 }} m²</span> }
+    </div>
+  </div>
+</a>
