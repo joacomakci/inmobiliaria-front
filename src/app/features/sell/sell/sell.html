@@ -1,0 +1,34 @@
+<section class="sell">
+  <h1>¿Querés vender?</h1>
+  <p class="sell__subtitle">Dejanos tu WhatsApp y te ayudamos</p>
+
+  @if (sent()) {
+    <p class="sell__success">
+      ¡Gracias! Te vamos a contactar a la brevedad para ayudarte a vender tu propiedad.
+    </p>
+  } @else {
+    <form [formGroup]="sellForm" (ngSubmit)="submit()" class="sell__form">
+      <div class="form-field">
+        <input type="text" formControlName="firstName" placeholder="Tu nombre" />
+        @if (sellForm.get('firstName')?.invalid && sellForm.get('firstName')?.touched) {
+          <span class="form-error">El nombre es obligatorio</span>
+        }
+      </div>
+
+      <div class="form-field">
+        <input type="tel" formControlName="phone" placeholder="Tu whatsapp" />
+        @if (sellForm.get('phone')?.invalid && sellForm.get('phone')?.touched) {
+          <span class="form-error">El teléfono es obligatorio</span>
+        }
+      </div>
+
+      @if (sendError()) {
+        <p class="form-error">Ocurrió un error al enviar tu consulta. Probá de nuevo.</p>
+      }
+
+      <button type="submit" class="btn btn--primary sell__submit" [disabled]="sending()">
+        @if (sending()) { Enviando... } @else { Enviar }
+      </button>
+    </form>
+  }
+</section>

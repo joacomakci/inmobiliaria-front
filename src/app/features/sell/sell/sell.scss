@@ -1,0 +1,56 @@
+.sell {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  text-align: center;
+
+  h1 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+  }
+
+  &__success {
+    color: #27ae60;
+    font-weight: 600;
+  }
+
+  &__form {
+    text-align: left;
+  }
+
+  &__submit {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.form-field {
+  margin-bottom: 16px;
+
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.form-error {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 4px;
+}

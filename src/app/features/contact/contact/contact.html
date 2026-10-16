@@ -1,0 +1,59 @@
+<section class="contact">
+  <div class="contact__layout">
+    <div class="contact__form-wrapper">
+      <h1>Dejanos tu Mensaje</h1>
+
+      @if (sent()) {
+        <p class="contact__success">
+          ¡Gracias! Recibimos tu consulta, te vamos a contactar a la brevedad.
+        </p>
+      } @else {
+        <form [formGroup]="contactForm" (ngSubmit)="submit()">
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" formControlName="firstName" placeholder="Tu nombre" />
+              @if (contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched) {
+                <span class="form-error">El nombre es obligatorio</span>
+              }
+            </div>
+
+            <div class="form-field">
+              <input type="email" formControlName="email" placeholder="Tu email" />
+              @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                <span class="form-error">Ingresá un email válido</span>
+              }
+            </div>
+
+            <div class="form-field">
+              <input type="tel" formControlName="phone" placeholder="Tu teléfono" />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <textarea rows="5" formControlName="message" placeholder="Tu mensaje"></textarea>
+            @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+              <span class="form-error">Contanos en qué podemos ayudarte</span>
+            }
+          </div>
+
+          @if (sendError()) {
+            <p class="form-error">Ocurrió un error al enviar tu consulta. Probá de nuevo.</p>
+          }
+
+          <button type="submit" class="btn btn--primary" [disabled]="sending()">
+            @if (sending()) { Enviando... } @else { Enviar }
+          </button>
+        </form>
+      }
+    </div>
+
+    <aside class="contact__info">
+      <h3>INFORMACIÓN DE CONTACTO</h3>
+
+      <p><strong>Teléfonos:</strong> (+54) (221) 000-0000</p>
+      <p><strong>Email:</strong> info&#64;inmobiliaria.com.ar</p>
+      <p><strong>Dirección:</strong> Calle Falsa 123, La Plata (CP 1900)</p>
+      <p><strong>Horario:</strong> lunes a viernes de 9 a 18 h</p>
+    </aside>
+  </div>
+</section>
